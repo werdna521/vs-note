@@ -1,6 +1,6 @@
-# werdna521-vs-note README
+# vs-note README
 
-This is the README for your extension "werdna521-vs-note". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "vs-note". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
