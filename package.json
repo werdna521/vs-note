@@ -16,8 +16,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "vs-note.helloWorld",
-        "title": "Hello World"
+        "command": "vs-note.refresh",
+        "title": "Refresh Notes",
+        "icon": {
+          "dark": "./src/media/dark/refresh.svg",
+          "light": "./src/media/light/refresh.svg"
+        }
       }
     ],
     "configuration": {
@@ -29,6 +33,15 @@
           "description": "Your notes directory"
         }
       }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "vs-note.helloWorld",
+          "when": "view == notes",
+          "group": "navigation"
+        }
+      ]
     },
     "viewsContainers": {
       "activitybar": [
