@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "vs-note" is now active!');
 
-  const noteProvider = new NoteProvider('');
+  const noteProvider = new NoteProvider();
   vscode.window.registerTreeDataProvider('notes', noteProvider);
 
 	// The command has been defined in the package.json file

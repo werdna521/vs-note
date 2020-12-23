@@ -20,6 +20,16 @@
         "title": "Hello World"
       }
     ],
+    "configuration": {
+      "title": "VS Note",
+      "properties": {
+        "vs-note.location": {
+          "type": "string",
+          "default": "",
+          "description": "Your notes directory"
+        }
+      }
+    },
     "viewsContainers": {
       "activitybar": [
         {
