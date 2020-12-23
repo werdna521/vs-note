@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import config from '../utils/config';
+import fs from '../utils/fs';
 
 export default class NoteProvider implements vscode.TreeDataProvider<Note> {
   private _onDidChangeTreeData:
@@ -36,7 +36,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
   }
 
   private getNotes(): Note[] | Thenable<Note[]> {
-    if (!this.pathExists(this.location!)) {
+    if (!fs.pathExists(this.location!)) {
       return vscode.window.showInformationMessage(
         'Please select where to store your notes',
         'Select'
@@ -62,27 +62,14 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
         });
     }
 
-    if (this.isDirectory(this.location!)) {
-      const files = fs.readdirSync(this.location!);
+    if (fs.isDirectory(this.location!)) {
+      const files = fs.getFiles(this.location!);
 
       return files.map(filename => {
         return new Note(filename, vscode.TreeItemCollapsibleState.None);
       });
     }
     return [];
-  }
-
-  private isDirectory(p: string): boolean {
-    return fs.lstatSync(p).isDirectory();
-  }
-
-  private pathExists(p: string): boolean {
-    try {
-      fs.accessSync(p);
-    } catch (err) {
-      return false;
-    }
-    return true;
   }
 }
 
