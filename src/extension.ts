@@ -1,5 +1,5 @@
 // Copyright (c) 2020 Andrew Cen
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -12,11 +12,16 @@ export function activate(context: vscode.ExtensionContext) {
   const noteProvider = new NoteProvider();
   vscode.window.registerTreeDataProvider('notes', noteProvider);
 
-  let disposable = vscode.commands.registerCommand('vs-note.refresh', () => {
-    noteProvider.refresh();
-  });
+  let disposable = [
+    vscode.commands.registerCommand('vs-note.refresh', () => {
+      noteProvider.refresh();
+    }),
+    vscode.commands.registerCommand('vs-note.add', () => {
+      vscode.window.showInformationMessage('Adding :)');
+    })
+  ];
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(...disposable);
 }
 
 export function deactivate() {}
