@@ -1,25 +1,31 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+// Copyright 2020 Andrew Cen
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import * as vscode from 'vscode';
 import NoteProvider from './providers/note-provider';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vs-note" is now active!');
+  console.log('Congratulations, your extension "vs-note" is now active!');
 
   const noteProvider = new NoteProvider();
   vscode.window.registerTreeDataProvider('notes', noteProvider);
 
-	let disposable = vscode.commands.registerCommand('vs-note.refresh', () => {
-		noteProvider.refresh();
-	});
+  let disposable = vscode.commands.registerCommand('vs-note.refresh', () => {
+    noteProvider.refresh();
+  });
 
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
