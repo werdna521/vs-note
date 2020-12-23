@@ -37,7 +37,7 @@
     "menus": {
       "view/title": [
         {
-          "command": "vs-note.helloWorld",
+          "command": "vs-note.refresh",
           "when": "view == notes",
           "group": "navigation"
         }

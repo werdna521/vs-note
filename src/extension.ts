@@ -14,14 +14,8 @@ export function activate(context: vscode.ExtensionContext) {
   const noteProvider = new NoteProvider();
   vscode.window.registerTreeDataProvider('notes', noteProvider);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vs-note.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from vs-note!');
+	let disposable = vscode.commands.registerCommand('vs-note.refresh', () => {
+		noteProvider.refresh();
 	});
 
 	context.subscriptions.push(disposable);
