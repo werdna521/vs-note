@@ -31,6 +31,10 @@
           "dark": "./src/media/dark/add.svg",
           "light": "./src/media/light/add.svg"
         }
+      },
+      {
+        "command": "vs-note.open",
+        "title": "Open Note"
       }
     ],
     "configuration": {
@@ -57,15 +61,6 @@
         }
       ]
     },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "vs-note",
-          "title": "VS Note",
-          "icon": "./src/media/writing.svg"
-        }
-      ]
-    },
     "views": {
       "vs-note": [
         {
@@ -75,7 +70,22 @@
           "contextualTitle": "VS Note"
         }
       ]
-    }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vs-note",
+          "title": "VS Note",
+          "icon": "./src/media/writing.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "notes",
+        "contents": "You have no notes.\n[Add Note](command:vs-note.add)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",

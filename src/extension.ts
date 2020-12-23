@@ -18,7 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
     }),
     vscode.commands.registerCommand('vs-note.add', () => {
       vscode.window.showInformationMessage('Adding :)');
-    })
+    }),
+    vscode.commands.registerCommand('vs-note.open', (file: string) => {
+      vscode.workspace
+        .openTextDocument(file)
+        .then((doc: vscode.TextDocument) => {
+          vscode.window.showTextDocument(doc, 1, false);
+        });
+    }),
   ];
 
   context.subscriptions.push(...disposable);

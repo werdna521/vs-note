@@ -1,9 +1,10 @@
 // Copyright (c) 2020 Andrew Cen
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
 import * as vscode from 'vscode';
+import * as path from 'path';
 import config from '../utils/config';
 import fs from '../utils/fs';
 import prompt from '../utils/prompt';
@@ -52,7 +53,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
       const files = fs.getFiles(this.location!);
 
       return files.map(filename => {
-        return new Note(filename);
+        return new Note(filename, path.join(this.location, filename));
       });
     }
 
@@ -61,9 +62,14 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
 }
 
 class Note extends vscode.TreeItem {
-  constructor(public readonly label: string) {
+  constructor(public readonly label: string, public readonly path: string) {
     super(label, vscode.TreeItemCollapsibleState.None);
     this.tooltip = `${this.label}`;
     this.description = 'note';
+    this.command = {
+      command: 'vs-note.open',
+      title: 'Open Note',
+      arguments: [this.path],
+    };
   }
 }
