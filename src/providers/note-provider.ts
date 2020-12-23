@@ -1,14 +1,15 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import config from '../utils/config';
 
 export default class NoteProvider implements vscode.TreeDataProvider<Note> {
   private _onDidChangeTreeData:
     vscode.EventEmitter<Note | undefined | null | void>;
   readonly onDidChangeTreeData: vscode.Event<Note | undefined | null | void>;
-  private location?: string;
+  private location: string;
 
   constructor() {
-    this.refreshLocation();
+    this.location = config.getLocation();
     this._onDidChangeTreeData = 
       new vscode.EventEmitter<Note | undefined | null | void>();
     this.onDidChangeTreeData = this._onDidChangeTreeData.event;
@@ -20,8 +21,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
   }
 
   refreshLocation(): void {
-    this.location = vscode.workspace.getConfiguration('vs-note')
-      .get('location') || '';
+    this.location = config.getLocation();
   }
   
   getTreeItem(element: Note): vscode.TreeItem {
@@ -53,8 +53,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
         })
         .then(dirs => {
           if (dirs) {
-            return vscode.workspace.getConfiguration('vs-note')
-              .update('location', dirs[0].path.slice(1), true);
+            return config.updateLocation(dirs[0].path);
           }
         })
         .then(() => {
