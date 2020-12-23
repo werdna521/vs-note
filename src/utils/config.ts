@@ -6,7 +6,7 @@ export default {
   getLocation(): string {
     return config.get<string>('location') || '';
   },
-  async updateLocation(location: string): Promise<void> {
-    await config.update('location', location);
+  updateLocation(location: string): Thenable<void> {
+    return config.update('location', location);
   }
 };
