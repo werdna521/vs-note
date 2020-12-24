@@ -70,7 +70,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
 class Note extends vscode.TreeItem {
   constructor(
     public readonly label: string,
-    public readonly path: string,
+    public readonly filepath: string,
     public readonly date: Date
   ) {
     super(label, vscode.TreeItemCollapsibleState.None);
@@ -79,7 +79,12 @@ class Note extends vscode.TreeItem {
     this.command = {
       command: 'vs-note.open',
       title: 'Open Note',
-      arguments: [this.path],
+      arguments: [this.filepath],
     };
   }
+
+  iconPath = {
+    dark: path.join(__filename, '..', '..', 'media', 'dark', 'writing.svg'),
+    light: path.join(__filename, '..', '..', 'media', 'light', 'writing.svg'),
+  };
 }
