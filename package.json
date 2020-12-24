@@ -12,6 +12,7 @@
   "activationEvents": [
     "onView:notes"
   ],
+  "publisher": "werdna521",
   "license": "MIT",
   "main": "./dist/extension.js",
   "contributes": {
