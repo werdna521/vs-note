@@ -1,5 +1,5 @@
 // Copyright (c) 2020 Andrew Cen
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -33,5 +33,16 @@ export default {
       .then((doc: vscode.TextDocument) => {
         vscode.window.showTextDocument(doc, 1, false);
       });
+  },
+  delete(path: vscode.Uri): Thenable<boolean> {
+    const edit = getEdit();
+    edit.deleteFile(
+      path,
+      {
+        ignoreIfNotExists: true,
+      },
+      { label: 'Delete', needsConfirmation: true }
+    );
+    return vscode.workspace.applyEdit(edit);
   },
 };

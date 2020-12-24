@@ -5,7 +5,16 @@
 
 import * as vscode from 'vscode';
 import NoteProvider, { Note } from '../providers/note-provider';
+import doc from '../utils/doc';
 
 export default (provider: NoteProvider): Function => (note: Note): void => {
-  vscode.window.showInformationMessage(note.label);
+  doc.delete(vscode.Uri.file(note.filepath))
+    .then((success: boolean) => {
+      if (success) {
+        vscode.window.showInformationMessage('Note deleted.');
+        provider.refresh();
+      } else {
+        vscode.window.showErrorMessage('Delete error.');
+      }
+    });
 };
