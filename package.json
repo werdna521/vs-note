@@ -35,6 +35,14 @@
       {
         "command": "vs-note.open",
         "title": "Open Note"
+      },
+      {
+        "command": "vs-note.delete",
+        "title": "Delete Note",
+        "icon": {
+          "dark": "./media/dark/delete.svg",
+          "light": "./media/light/delete.svg"
+        }
       }
     ],
     "configuration": {
@@ -58,6 +66,13 @@
           "command": "vs-note.add",
           "when": "view == notes",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "vs-note.delete",
+          "when": "view == notes",
+          "group": "inline"
         }
       ]
     },

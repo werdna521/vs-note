@@ -67,7 +67,7 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
   }
 }
 
-class Note extends vscode.TreeItem {
+export class Note extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly filepath: string,

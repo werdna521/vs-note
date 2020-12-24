@@ -6,6 +6,7 @@
 import * as vscode from 'vscode';
 import NoteProvider from '../providers/note-provider';
 import add from './add';
+import del from './delete';
 import open from './open';
 import refresh from './refresh';
 
@@ -19,6 +20,11 @@ const commands: Command[] = [
   {
     name: 'vs-note.add',
     handler: add,
+    requireProvider: true,
+  },
+  {
+    name: 'vs-note.delete',
+    handler: del,
     requireProvider: true,
   },
   {
