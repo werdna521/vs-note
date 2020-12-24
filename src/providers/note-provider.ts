@@ -6,6 +6,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import config from '../utils/config';
+import datetime from '../utils/datetime';
+import format from '../utils/format';
 import fs from '../utils/fs';
 import prompt from '../utils/prompt';
 
@@ -53,7 +55,11 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
       const files = fs.getFiles(this.location!);
 
       return files.map(filename => {
-        return new Note(filename, path.join(this.location, filename));
+        return new Note(
+          format.note(filename),
+          path.join(this.location, filename),
+          new Date()
+        );
       });
     }
 
@@ -62,10 +68,14 @@ export default class NoteProvider implements vscode.TreeDataProvider<Note> {
 }
 
 class Note extends vscode.TreeItem {
-  constructor(public readonly label: string, public readonly path: string) {
+  constructor(
+    public readonly label: string,
+    public readonly path: string,
+    public readonly date: Date
+  ) {
     super(label, vscode.TreeItemCollapsibleState.None);
     this.tooltip = `${this.label}`;
-    this.description = 'note';
+    this.description = datetime.toReadable(this.date);
     this.command = {
       command: 'vs-note.open',
       title: 'Open Note',
